@@ -39,6 +39,7 @@ jobs:
       run: |
         echo "Building the project..."
         npm run build
+        echo "Build completed successfully."
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
