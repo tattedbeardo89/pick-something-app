@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Film, Tv, Book } from "lucide-react";
+import { Film, Tv, Book, Search } from "lucide-react";
 import { Category } from "@/types";
 import LoadingSpinner from "./LoadingSpinner";
 
@@ -40,7 +40,8 @@ const CategoryButtons: React.FC<CategoryButtonsProps> = ({
           ) : (
             <>
               {icon}
-              <span className="ml-2 capitalize">{name}</span>
+              <span className="ml-2 capitalize">Search {name}</span>
+              <Search size={16} className="ml-1" />
             </>
           )}
         </Button>
