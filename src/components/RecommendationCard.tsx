@@ -4,6 +4,7 @@ import { Movie, TvShow, Book, Category } from "@/types";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, ShoppingCart, Video } from "lucide-react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface RecommendationCardProps {
   item: Movie | TvShow | Book;
@@ -76,7 +77,7 @@ const RecommendationCard: React.FC<RecommendationCardProps> = ({ item, category 
   const getAmazonLink = () => {
     if (isBook(item)) {
       // Replace YOUR_AFFILIATE_ID with your actual Amazon affiliate ID in production
-      const affiliateId = "picksomethi0a-20";
+      const affiliateId = "watchread-20";
       const searchQuery = encodeURIComponent(`${item.title} ${item.authors.join(' ')}`);
       return `https://www.amazon.com/s?k=${searchQuery}&tag=${affiliateId}`;
     }
@@ -143,47 +144,47 @@ const RecommendationCard: React.FC<RecommendationCardProps> = ({ item, category 
   };
 
   return (
-    <Card className={`w-full max-w-md bg-gradient-to-b ${getCategoryColor()} border-white/10 text-white shadow-lg animate-fade-in`}>
-      <div className="grid grid-cols-3 gap-4">
-        <CardHeader className="col-span-3 sm:col-span-1 p-4">
-          <div className="w-full h-[200px] sm:h-[280px] rounded-md overflow-hidden">
+    <Card className={`w-full max-w-5xl mx-auto bg-gradient-to-b ${getCategoryColor()} border-white/10 text-white shadow-lg animate-fade-in`}>
+      <div className="grid grid-cols-3 gap-6 p-3 md:p-6">
+        <CardHeader className="col-span-3 md:col-span-1 p-0 md:p-4">
+          <AspectRatio ratio={2/3} className="bg-black/20 overflow-hidden rounded-md">
             <img
               src={getImageUrl()}
               alt={getTitle()}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
-          </div>
+          </AspectRatio>
         </CardHeader>
         
-        <div className="col-span-3 sm:col-span-2">
-          <CardContent className="p-4 pt-0 sm:pt-4">
-            <CardTitle className="text-xl mb-2 text-white">{getTitle()}</CardTitle>
-            <div className="text-sm text-white/70 mb-3">
+        <div className="col-span-3 md:col-span-2">
+          <CardContent className="p-2 md:p-4 pt-0 md:pt-4">
+            <CardTitle className="text-2xl md:text-3xl mb-2 md:mb-4 text-white">{getTitle()}</CardTitle>
+            <div className="text-sm md:text-base text-white/70 mb-3 md:mb-5">
               {getDetails()}
             </div>
-            <CardDescription className="text-white/80 line-clamp-4">
-              {truncateDescription(getDescription())}
+            <CardDescription className="text-white/80 text-sm md:text-base line-clamp-6 md:line-clamp-none">
+              {getDescription()}
             </CardDescription>
           </CardContent>
           
-          <CardFooter className="p-4 pt-0 flex flex-col gap-2">
+          <CardFooter className="p-2 md:p-4 pt-0 flex flex-col gap-3">
             <Button
-              className="mt-2 bg-white/20 hover:bg-white/30 text-white w-full"
+              className="mt-2 bg-white/20 hover:bg-white/30 text-white w-full text-sm md:text-base py-5 md:py-6"
               asChild
             >
               <a href={getLink()} target="_blank" rel="noopener noreferrer">
-                <ExternalLink size={16} className="mr-2" />
+                <ExternalLink size={18} className="mr-2" />
                 View Details
               </a>
             </Button>
             
             {isBook(item) && (
               <Button
-                className="bg-amber-600/80 hover:bg-amber-600 text-white w-full"
+                className="bg-amber-600/80 hover:bg-amber-600 text-white w-full text-sm md:text-base py-5 md:py-6"
                 asChild
               >
                 <a href={getAmazonLink()} target="_blank" rel="noopener noreferrer">
-                  <ShoppingCart size={16} className="mr-2" />
+                  <ShoppingCart size={18} className="mr-2" />
                   Buy on Amazon
                 </a>
               </Button>
@@ -191,11 +192,11 @@ const RecommendationCard: React.FC<RecommendationCardProps> = ({ item, category 
             
             {(isMovie(item) || isTvShow(item)) && (
               <Button
-                className="bg-blue-600/80 hover:bg-blue-600 text-white w-full"
+                className="bg-blue-600/80 hover:bg-blue-600 text-white w-full text-sm md:text-base py-5 md:py-6"
                 asChild
               >
                 <a href={getWhereToWatchLink()} target="_blank" rel="noopener noreferrer">
-                  <Video size={16} className="mr-2" />
+                  <Video size={18} className="mr-2" />
                   Where to Watch
                 </a>
               </Button>
