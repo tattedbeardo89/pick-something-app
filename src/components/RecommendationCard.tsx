@@ -76,7 +76,7 @@ const RecommendationCard: React.FC<RecommendationCardProps> = ({ item, category 
   const getAmazonLink = () => {
     if (isBook(item)) {
       // Replace YOUR_AFFILIATE_ID with your actual Amazon affiliate ID in production
-      const affiliateId = "watchread-20";
+      const affiliateId = "picksomethi0a-20";
       const searchQuery = encodeURIComponent(`${item.title} ${item.authors.join(' ')}`);
       return `https://www.amazon.com/s?k=${searchQuery}&tag=${affiliateId}`;
     }
