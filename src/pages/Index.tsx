@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import SearchBar from "@/components/SearchBar";
 import CategoryButtons from "@/components/CategoryButtons";
@@ -17,9 +18,10 @@ const Index: React.FC = () => {
 
   const handleSearch = (searchTerm: string) => {
     setKeyword(searchTerm);
-    setSelectedCategory(null);
-    setRecommendation(null);
-    setHasSearched(false);
+    // Don't reset these anymore since category buttons handle the search
+    // setSelectedCategory(null);
+    // setRecommendation(null);
+    // setHasSearched(false);
   };
 
   const handleCategorySelect = async (category: Category) => {
@@ -81,7 +83,7 @@ const Index: React.FC = () => {
 
   return (
     <div className="min-h-screen w-full bg-gradient-main text-white flex flex-col justify-between">
-      <div className="container max-w-4xl mx-auto px-4 py-8 lg:py-16 flex flex-col items-center">
+      <div className="container mx-auto px-4 py-8 lg:py-12 flex flex-col items-center">
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-2">
           What Should I Watch or Read?
         </h1>
@@ -89,16 +91,18 @@ const Index: React.FC = () => {
           Enter a keyword to get a random movie, TV show, or book recommendation
         </p>
         
-        <SearchBar onSearch={handleSearch} isLoading={isLoading} />
-        
-        <CategoryButtons
-          onSelectCategory={handleCategorySelect}
-          isLoading={isLoading}
-          selectedCategory={selectedCategory}
-          disabled={!keyword}
-        />
+        <div className="w-full max-w-2xl mb-10">
+          <SearchBar onSearch={handleSearch} isLoading={isLoading} />
+          
+          <CategoryButtons
+            onSelectCategory={handleCategorySelect}
+            isLoading={isLoading}
+            selectedCategory={selectedCategory}
+            disabled={!keyword}
+          />
+        </div>
 
-        <div className="w-full flex flex-col items-center min-h-[200px]">
+        <div className="w-full flex flex-col items-center">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-12">
               <LoadingSpinner size="lg" />
@@ -111,7 +115,7 @@ const Index: React.FC = () => {
             </div>
           ) : recommendation && selectedCategory ? (
             <>
-              <div className="mb-6 flex justify-between w-full max-w-md">
+              <div className="mb-6 flex justify-between w-full max-w-5xl">
                 <h2 className="text-xl font-semibold">Your Recommendation</h2>
                 <button
                   onClick={() => handleCategorySelect(selectedCategory)}
@@ -123,7 +127,7 @@ const Index: React.FC = () => {
               <RecommendationCard item={recommendation} category={selectedCategory} />
             </>
           ) : (
-            <div className="text-center p-8 bg-white/10 rounded-lg animate-pulse-light">
+            <div className="text-center p-8 bg-white/10 rounded-lg animate-pulse-light w-full max-w-2xl">
               <h3 className="text-xl mb-2">Ready to discover something new?</h3>
               <p className="text-white/80">
                 Enter a keyword above and select a category to get started.
